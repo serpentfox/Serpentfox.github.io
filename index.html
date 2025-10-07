@@ -13,40 +13,65 @@
     }
     *{box-sizing:border-box}
     body{font-family:Inter,system-ui,Arial; margin:0; background:linear-gradient(180deg,#061018 0%, #07181a 100%); color:#e6eef6; -webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--maxw); margin:40px auto; padding:28px;}.header{display:flex;gap:20px;align-items:center}
-.avatar{width:120px;height:120px;border-radius:14px;overflow:hidden;flex:0 0 120px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
-.meta{flex:1}
-h1{margin:0;font-size:28px;letter-spacing:0.6px}
-.role{margin-top:8px;color:var(--muted);font-weight:600}
-.tagline{margin-top:12px;color:var(--muted);font-size:15px}
+    .wrap{max-width:var(--maxw); margin:40px auto; padding:28px;}
+    .header{display:flex;gap:20px;align-items:center}
+    .avatar{width:120px;height:120px;border-radius:14px;overflow:hidden;flex:0 0 120px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
+    .meta{flex:1}
+    h1{margin:0;font-size:28px;letter-spacing:0.6px}
+    .role{margin-top:8px;color:var(--muted);font-weight:600}
+    .tagline{margin-top:12px;color:var(--muted);font-size:15px}
 
-.grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:28px}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:28px}
 
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
 
-.section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.section-title h3{margin:0}
-ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
-ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
+    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .section-title h3{margin:0}
+    ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+    ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
 
-.projects{display:grid;grid-template-columns:1fr;gap:12px}
-.project{display:flex;gap:12px;align-items:center}
-.project .thumb{width:120px;height:80px;border-radius:8px;overflow:hidden;flex:0 0 120px}
-.project .thumb img{width:100%;height:100%;object-fit:cover}
-.project .info h4{margin:0 0 6px 0}
-.project .info p{margin:0;color:var(--muted);font-size:14px}
+    .projects{display:grid;grid-template-columns:1fr;gap:12px}
+    .project{display:flex;gap:12px;align-items:center}
+    .project .thumb{width:120px;height:80px;border-radius:8px;overflow:hidden;flex:0 0 120px}
+    .project .thumb img{width:100%;height:100%;object-fit:cover;cursor:pointer}
+    .project .info h4{margin:0 0 6px 0}
+    .project .info p{margin:0;color:var(--muted);font-size:14px}
 
-.contact{display:flex;flex-direction:column;gap:8px}
-.contact a{color:inherit;text-decoration:none;background:linear-gradient(90deg, rgba(197,154,82,0.12), rgba(197,154,82,0.06));padding:10px;border-radius:8px}
+    .contact{display:flex;flex-direction:column;gap:8px}
+    .contact a{color:inherit;text-decoration:none;background:linear-gradient(90deg, rgba(197,154,82,0.12), rgba(197,154,82,0.06));padding:10px;border-radius:8px}
 
-footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
+    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
 
-@media (max-width:880px){
-  .grid{grid-template-columns:1fr;}
-  .avatar{width:96px;height:96px}
-}
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr;}
+      .avatar{width:96px;height:96px}
+    }
 
+    /* Fullscreen image viewer */
+    .img-viewer {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .img-viewer img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+    .img-viewer.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
   </style>
 </head>
 <body>
@@ -58,77 +83,94 @@ footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
         <div class="role">Freelance designer • Logo, Poster, Menu, Panel</div>
         <div class="tagline">Sáng tạo không chỉ để đẹp, mà để định danh.</div>
       </div>
-    </div><div class="grid">
-  <div>
-    <div class="card">
-      <div class="section-title"><h3>🧩 Giới thiệu</h3></div>
-      <p>Tôi là <strong>Serpentfox</strong>, một <strong>freelance designer</strong> với niềm đam mê sáng tạo trong từng chi tiết hình ảnh. Tôi tập trung vào thiết kế logo, poster, menu và panel — những yếu tố tạo nên bản sắc cho thương hiệu. Mỗi sản phẩm tôi làm đều được phát triển từ concept đến hoàn thiện, mang cảm xúc và câu chuyện riêng.</p>
     </div>
 
-    <div class="card" style="margin-top:14px">
-      <div class="section-title"><h3>⚙️ Kỹ năng chính</h3></div>
-      <ul class="skills">
-        <li>Logo design</li>
-        <li>Poster & Banner</li>
-        <li>Menu design</li>
-        <li>Brand concept</li>
-      </ul>
-    </div>
-
-    <div class="card" style="margin-top:14px">
-      <div class="section-title"><h3>🏆 Dự án tiêu biểu</h3></div>
-      <div class="projects">
-        <div class="project">
-          <div class="thumb"><img src="images/vulcoris.jpg" alt="Vulcoris"/></div>
-          <div class="info">
-            <h4>VULCORIS — Biểu tượng linh thú</h4>
-            <p>Logo kết hợp cáo + quạ, phong cách kim loại sang trọng, phù hợp đội tuyển esports.</p>
-          </div>
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="section-title"><h3>🧩 Giới thiệu</h3></div>
+          <p>Tôi là <strong>Serpentfox</strong>, một <strong>freelance designer</strong> với niềm đam mê sáng tạo trong từng chi tiết hình ảnh. Tôi tập trung vào thiết kế logo, poster, menu và panel — những yếu tố tạo nên bản sắc cho thương hiệu. Mỗi sản phẩm tôi làm đều được phát triển từ concept đến hoàn thiện, mang cảm xúc và câu chuyện riêng.</p>
         </div>
 
-        <div class="project">
-          <div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
-          <div class="info">
-            <h4>SUR — Huy hiệu tinh thần</h4>
-            <p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p>
-          </div>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title"><h3>⚙️ Kỹ năng chính</h3></div>
+          <ul class="skills">
+            <li>Logo design</li>
+            <li>Poster & Banner</li>
+            <li>Menu design</li>
+            <li>Brand concept</li>
+          </ul>
         </div>
 
-        <div class="project">
-          <div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
-          <div class="info">
-            <h4>NFE — NewForce Esports</h4>
-            <p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p>
+        <div class="card" style="margin-top:14px">
+          <div class="section-title"><h3>🏆 Dự án tiêu biểu</h3></div>
+          <div class="projects">
+            <div class="project">
+              <div class="thumb"><img src="images/vulcoris.jpg" alt="Vulcoris"/></div>
+              <div class="info">
+                <h4>VULCORIS — Biểu tượng linh thú</h4>
+                <p>Logo kết hợp cáo + quạ, phong cách kim loại sang trọng, phù hợp đội tuyển esports.</p>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
+              <div class="info">
+                <h4>SUR — Huy hiệu tinh thần</h4>
+                <p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
+              <div class="info">
+                <h4>NFE — NewForce Esports</h4>
+                <p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
+
+      <aside>
+        <div class="card">
+          <div class="section-title"><h3>📞 Liên hệ</h3></div>
+          <div class="contact">
+            <a href="https://www.tiktok.com/@vulcorisc" target="_blank">TikTok: @serpentfoxdesginer</a>
+            <a href="https://www.instagram.com/dathamar" target="_blank">Instagram: @dathanmar</a>
+            <a href="mailto:youremail@example.com">Email: user.nguyenphongdat@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <div class="section-title"><h3>🌌 Triết lý thiết kế</h3></div>
+          <p style="color:var(--muted)">"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
+        </div>
+      </aside>
     </div>
 
+    <footer>
+      © SERPENTFOX • Portfolio — Designed by Serpentfox
+    </footer>
   </div>
 
-  <aside>
-    <div class="card">
-      <div class="section-title"><h3>📞 Liên hệ</h3></div>
-      <div class="contact">
-        <a href="https://www.tiktok.com/@vulcorisc" target="_blank">TikTok:@serpentfoxdesinger</a>
-        <a href="https://www.instagram.com/dathamar" target="_blank">Instagram: @dathanmar</a>
-        <a href="mailto:youremail@example.com">Email: user.nguyenphongdat@gmail.com</a>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:14px">
-      <div class="section-title"><h3>🌌 Triết lý thiết kế</h3></div>
-      <p style="color:var(--muted)">"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
-    </div>
-
-  </aside>
-</div>
-
-<footer>
-  © SERPENTFOX • Portfolio — Designed by Serpentfox
-</footer>
-
+  <!-- Image Viewer -->
+  <div class="img-viewer" id="imgViewer">
+    <img src="" alt="Xem ảnh lớn">
   </div>
+
+  <script>
+    const viewer = document.getElementById('imgViewer');
+    const viewerImg = viewer.querySelector('img');
+    document.querySelectorAll('.project .thumb img, .avatar img').forEach(img => {
+      img.addEventListener('click', () => {
+        viewerImg.src = img.src;
+        viewer.classList.add('active');
+      });
+    });
+    viewer.addEventListener('click', () => {
+      viewer.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
