@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="vi">
 <head>
 <meta charset="utf-8" />
@@ -37,9 +36,11 @@ ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:va
 .project .thumb img{width:100%;height:100%;object-fit:cover;cursor:pointer}
 .project .info h4{margin:0 0 6px 0}
 .project .info p{margin:0;color:var(--muted);font-size:14px}
-.poster{display:grid;grid-template-columns:1fr;gap:12px}
-.poster{display:flex;gap:12px;align-items:center}
-.poster .thumb{width:340px;height:240px;border-radius:8px;overflow:hidden;flex:0 0 240px}
+
+/* Thay đổi cho poster: Container dọc, item ngang */
+.poster{display:flex;flex-direction:column;gap:12px}  /* Container poster xếp dọc */
+.poster .poster{display:flex;gap:12px;align-items:center}  /* Mỗi poster item (thumb + info) ngang */
+.poster .thumb{width:240px;height:240px;border-radius:8px;overflow:hidden;flex:0 0 240px}  /* Sửa width từ 340px xuống 240px để khớp flex */
 .poster .thumb img{width:100%;height:100%;object-fit:cover;cursor:pointer}
 .poster .info h4{margin:0 0 6px 0}
 .poster .info p{margin:0;color:var(--muted);font-size:14px}
@@ -53,8 +54,6 @@ footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
 .grid{grid-template-columns:1fr;}
 .avatar{width:96px;height:96px}
 }
-
-/* Fullscreen image viewer */
 .img-viewer {
 position: fixed;
 top: 0; left: 0;
@@ -142,7 +141,7 @@ pointer-events: auto;
 <div class="section-title"><h3>Poster</h3></div>
 <div class="poster">
 <div class="poster">
-<div class="thumb"><img src="images/thang4.jpg" alt="Thang4"/></div>
+<div class="thumb"><img src="images/cccc.jpg" alt="Vulcoris"/></div>
 <div class="info">
 <h4>Thang4 — Đơn giản nhẹ nhàng</h4>
 <p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p>
@@ -209,4 +208,3 @@ viewer.classList.remove('active');
 </script>
 </body>
 </html>
-
