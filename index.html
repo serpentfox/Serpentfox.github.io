@@ -21,17 +21,19 @@ h1{margin:0;font-size:28px;letter-spacing:0.6px}
 .role{margin-top:8px;color:var(--muted);font-weight:600}
 .tagline{margin-top:12px;color:var(--muted);font-size:15px}
 
-/* === LAYOUT 1 CỘT === */
+/* Layout 1 cột */
 .section{margin-top:24px;}
 .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6);margin-top:14px;}
+padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6);margin-top:14px;
+opacity:0;transform:translateY(40px);transition:all 0.8s ease-out;}
+.card.visible{opacity:1;transform:translateY(0);}
 
 .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .section-title h3{margin:0}
 ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
 ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
 
-/* === PROJECTS & POSTERS === */
+/* Projects & Posters */
 .projects, .poster {display:flex;flex-direction:column;gap:16px}
 .project, .poster-item {display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .project .thumb, .poster-item .thumb {width:100%;max-width:320px;border-radius:12px;overflow:hidden;flex:0 0 auto}
@@ -71,7 +73,7 @@ position:absolute;top:20px;right:30px;font-size:32px;color:white;cursor:pointer;
 <div class="wrap">
 
 <!-- Header -->
-<div class="header card">
+<div class="header card visible">
   <div class="avatar"><img src="images/avatar.jpg" alt="Serpentfox Avatar" /></div>
   <div class="meta">
     <h1>SERPENTFOX <span style="color:var(--accent);font-weight:800">— Designer</span></h1>
@@ -160,6 +162,7 @@ position:absolute;top:20px;right:30px;font-size:32px;color:white;cursor:pointer;
 </div>
 
 <script>
+// Viewer
 const viewer = document.getElementById('imgViewer');
 const viewerImg = viewer.querySelector('img');
 document.querySelectorAll('.thumb img, .avatar img').forEach(img => {
@@ -174,6 +177,17 @@ document.getElementById('closeViewer').addEventListener('click', () => {
 viewer.addEventListener('click', e => {
   if(e.target === viewer) viewer.classList.remove('active');
 });
+
+// Hiệu ứng trượt khi cuộn
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold: 0.15});
+cards.forEach(card => observer.observe(card));
 </script>
 </body>
 </html>
