@@ -8,7 +8,7 @@
 <style>
 :root{
 --bg:#071018; --card:#0f1720; --accent:#c59a52; --muted:#9aa4ad; --glass: rgba(255,255,255,0.03);
---maxw:980px;
+--maxw:880px;
 }
 *{box-sizing:border-box}
 body{font-family:Inter,system-ui,Arial; margin:0; background:linear-gradient(180deg,#061018 0%, #07181a 100%); color:#e6eef6; -webkit-font-smoothing:antialiased}
@@ -21,167 +21,131 @@ h1{margin:0;font-size:28px;letter-spacing:0.6px}
 .role{margin-top:8px;color:var(--muted);font-weight:600}
 .tagline{margin-top:12px;color:var(--muted);font-size:15px}
 
-.grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:28px}
-
-.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+/* === LAYOUT 1 CỘT === */
+.section{margin-top:24px;}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6);margin-top:14px;}
 
 .section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .section-title h3{margin:0}
 ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
 ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600}
 
-.projects{display:grid;grid-template-columns:1fr;gap:12px}
-.project{display:flex;gap:12px;align-items:center}
-.project .thumb{width:240px;height:240px;border-radius:15px;overflow:hidden;flex:0 0 240px}
-.project .thumb img{width:100%;height:100%;object-fit:cover;cursor:pointer}
-.project .info h4{margin:0 0 6px 0}
-.project .info p{margin:0;color:var(--muted);font-size:14px}
+/* === PROJECTS & POSTERS === */
+.projects, .poster {display:flex;flex-direction:column;gap:16px}
+.project, .poster-item {display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.project .thumb, .poster-item .thumb {width:100%;max-width:320px;border-radius:12px;overflow:hidden;flex:0 0 auto}
+.project .thumb img, .poster-item .thumb img {width:100%;height:100%;object-fit:cover;cursor:pointer;border-radius:12px}
+.project .info, .poster-item .info {flex:1;min-width:240px}
+.project .info h4, .poster-item .info h4{margin:0 0 6px 0}
+.project .info p, .poster-item .info p{margin:0;color:var(--muted);font-size:14px}
 
-/* Thay đổi cho poster: Container dọc, item ngang */
-.poster{display:flex;flex-direction:column;gap:12px}  /* Container poster xếp dọc */
-.poster .poster{display:flex;gap:12px;align-items:center}  /* Mỗi poster item (thumb + info) ngang */
-.poster .thumb{width:240px;height:240px;border-radius:8px;overflow:hidden;flex:0 0 240px}  /* Sửa width từ 340px xuống 240px để khớp flex */
-.poster .thumb img{width:100%;height:100%;object-fit:cover;cursor:pointer}
-.poster .info h4{margin:0 0 6px 0}
-.poster .info p{margin:0;color:var(--muted);font-size:14px}
-
+/* Liên hệ */
 .contact{display:flex;flex-direction:column;gap:8px}
 .contact a{color:inherit;text-decoration:none;background:linear-gradient(90deg, rgba(197,154,82,0.12), rgba(197,154,82,0.06));padding:10px;border-radius:8px}
 
 footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
 
-@media (max-width:880px){
-.grid{grid-template-columns:1fr;}
-.avatar{width:96px;height:96px}
-}
+/* Viewer */
 .img-viewer {
-position: fixed;
-top: 0; left: 0;
-width: 100vw; height: 100vh;
-background: rgba(0,0,0,0.9);
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 9999;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.3s ease;
+position: fixed;top: 0; left: 0;width: 100vw; height: 100vh;
+background: rgba(0,0,0,0.9);display: flex;justify-content: center;align-items: center;
+z-index: 9999;opacity: 0;pointer-events: none;transition: opacity 0.3s ease;
 }
 .img-viewer img {
-max-width: 90%;
-max-height: 90%;
-border-radius: 12px;
-box-shadow: 0 0 30px rgba(0,0,0,0.6);
+max-width: 90%;max-height: 90%;border-radius: 12px;box-shadow: 0 0 30px rgba(0,0,0,0.6);
 }
-.img-viewer.active {
-opacity: 1;
-pointer-events: auto;
+.img-viewer.active {opacity: 1;pointer-events: auto;}
+.img-viewer .close-btn{
+position:absolute;top:20px;right:30px;font-size:32px;color:white;cursor:pointer;font-weight:800;
+}
+
+/* Responsive */
+@media (max-width:600px){
+.project, .poster-item{flex-direction:column;align-items:flex-start}
+.project .thumb, .poster-item .thumb{width:100%;height:auto}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
+
+<!-- Header -->
 <div class="header card">
-<div class="avatar"><img src="images/avatar.jpg" alt="Serpentfox Avatar" /></div>
-<div class="meta">
-<h1>SERPENTFOX <span style="color:var(--accent);font-weight:800">— Designer</span></h1>
-<div class="role">Freelance designer • Logo, Poster, Menu, Panel</div>
-<div class="tagline">Sáng tạo không chỉ để đẹp, mà để khách nhớ đến bạn.</div>
-</div>
-</div>
-
-<div class="grid">
-<div>
-<div class="card">
-<div class="section-title"><h3> Giới thiệu</h3></div>
-<p>Tôi là <strong>Serpentfox</strong>, một <strong>freelance designer</strong> với niềm đam mê sáng tạo trong từng chi tiết hình ảnh. 
-</p>
+  <div class="avatar"><img src="images/avatar.jpg" alt="Serpentfox Avatar" /></div>
+  <div class="meta">
+    <h1>SERPENTFOX <span style="color:var(--accent);font-weight:800">— Designer</span></h1>
+    <div class="role">Freelance designer • Logo, Poster, Menu, Panel</div>
+    <div class="tagline">Sáng tạo không chỉ để đẹp, mà để khách nhớ đến bạn.</div>
+  </div>
 </div>
 
-<div class="card" style="margin-top:14px">
-<div class="section-title"><h3>⚙️ Kỹ năng chính</h3></div>
-<ul class="skills">
-<li>Logo design</li>
-<li>Poster & Banner</li>
-<li>Menu design</li>
-<li>Brand concept</li>
-</ul>
+<!-- Giới thiệu -->
+<div class="section card">
+  <div class="section-title"><h3>Giới thiệu</h3></div>
+  <p>Tôi là <strong>Serpentfox</strong>, một <strong>freelance designer</strong> với niềm đam mê sáng tạo trong từng chi tiết hình ảnh.</p>
 </div>
 
-<div class="card" style="margin-top:14px">
-<div class="section-title"><h3> Logo </h3></div>
-<div class="projects">
-<div class="project">
-<div class="thumb"><img src="images/thang4.jpg" alt="Thang4"/></div>
-<div class="info">
-<h4>Thang4 — Đơn giản nhẹ nhàng</h4>
-<p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p>
-</div>
+<!-- Kỹ năng -->
+<div class="section card">
+  <div class="section-title"><h3>⚙️ Kỹ năng chính</h3></div>
+  <ul class="skills">
+    <li>Logo design</li><li>Poster & Banner</li><li>Menu design</li><li>Brand concept</li>
+  </ul>
 </div>
 
-<div class="project">
-<div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
-<div class="info">
-<h4>SUR — Huy hiệu tinh thần</h4>
-<p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p>
-</div>
-</div>
-
-<div class="project">
-<div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
-<div class="info">
-<h4>NFE — NewForce Esports</h4>
-<p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="card" style="margin-top:14px">
-<div class="section-title"><h3>Poster</h3></div>
-<div class="poster">
-<div class="poster">
-<div class="thumb"><img src="images/thang4.jpg" alt="Thang4"/></div>
-<div class="info">
-<h4>Thang4 — Đơn giản nhẹ nhàng</h4>
-<p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p>
-</div>
+<!-- Logo -->
+<div class="section card">
+  <div class="section-title"><h3>Logo</h3></div>
+  <div class="projects">
+    <div class="project">
+      <div class="thumb"><img src="images/thang4.jpg" alt="Thang4"/></div>
+      <div class="info"><h4>Thang4 — Đơn giản nhẹ nhàng</h4><p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p></div>
+    </div>
+    <div class="project">
+      <div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
+      <div class="info"><h4>SUR — Huy hiệu tinh thần</h4><p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p></div>
+    </div>
+    <div class="project">
+      <div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
+      <div class="info"><h4>NFE — NewForce Esports</h4><p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p></div>
+    </div>
+  </div>
 </div>
 
-<div class="poster">
-<div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
-<div class="info">
-<h4>SUR — Huy hiệu tinh thần</h4>
-<p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p>
-</div>
-</div>
-
-<div class="poster">
-<div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
-<div class="info">
-<h4>NFE — NewForce Esports</h4>
-<p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<aside>
-<div class="card">
-<div class="section-title"><h3> Liên hệ</h3></div>
-<div class="contact">
-<a href="https://www.tiktok.com/@serpentfoxdesigner" target="_blank">TikTok: @serpentfoxdesigner</a>
-<a href="https://www.instagram.com/dathanmar" target="_blank">Instagram: @dathanmar</a>
-<a href="mailto:user.nguyenphongdat@gmail.com">Email: user.nguyenphongdat@gmail.com</a>
-</div>
+<!-- Poster -->
+<div class="section card">
+  <div class="section-title"><h3>Poster</h3></div>
+  <div class="poster">
+    <div class="poster-item">
+      <div class="thumb"><img src="images/thang4.jpg" alt="Thang4"/></div>
+      <div class="info"><h4>Thang4 — Đơn giản nhẹ nhàng</h4><p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p></div>
+    </div>
+    <div class="poster-item">
+      <div class="thumb"><img src="images/sur.jpg" alt="SUR"/></div>
+      <div class="info"><h4>SUR — Huy hiệu tinh thần</h4><p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p></div>
+    </div>
+    <div class="poster-item">
+      <div class="thumb"><img src="images/nfe.jpg" alt="NFE"/></div>
+      <div class="info"><h4>NFE — NewForce Esports</h4><p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p></div>
+    </div>
+  </div>
 </div>
 
-<div class="card" style="margin-top:14px">
-<div class="section-title"><h3> Triết lý thiết kế</h3></div>
-<p style="color:var(--muted)">"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
+<!-- Liên hệ -->
+<div class="section card">
+  <div class="section-title"><h3>Liên hệ</h3></div>
+  <div class="contact">
+    <a href="https://www.tiktok.com/@serpentfoxdesigner" target="_blank">TikTok: @serpentfoxdesigner</a>
+    <a href="https://www.instagram.com/dathanmar" target="_blank">Instagram: @dathanmar</a>
+    <a href="mailto:user.nguyenphongdat@gmail.com">Email: user.nguyenphongdat@gmail.com</a>
+  </div>
 </div>
-</aside>
+
+<!-- Triết lý -->
+<div class="section card">
+  <div class="section-title"><h3>Triết lý thiết kế</h3></div>
+  <p style="color:var(--muted)">"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
 </div>
 
 <footer>
@@ -189,21 +153,26 @@ pointer-events: auto;
 </footer>
 </div>
 
+<!-- Image viewer -->
 <div class="img-viewer" id="imgViewer">
+<span class="close-btn" id="closeViewer">×</span>
 <img src="" alt="Xem ảnh lớn">
 </div>
 
 <script>
 const viewer = document.getElementById('imgViewer');
 const viewerImg = viewer.querySelector('img');
-document.querySelectorAll('.project .thumb img, .avatar img').forEach(img => {
-img.addEventListener('click', () => {
-viewerImg.src = img.src;
-viewer.classList.add('active');
+document.querySelectorAll('.thumb img, .avatar img').forEach(img => {
+  img.addEventListener('click', () => {
+    viewerImg.src = img.src;
+    viewer.classList.add('active');
+  });
 });
+document.getElementById('closeViewer').addEventListener('click', () => {
+  viewer.classList.remove('active');
 });
-viewer.addEventListener('click', () => {
-viewer.classList.remove('active');
+viewer.addEventListener('click', e => {
+  if(e.target === viewer) viewer.classList.remove('active');
 });
 </script>
 </body>
