@@ -1,103 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>SERPENTFOX — Portfolio & Bio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#d8d8d8;
-  --card:#f4f4f4;
-  --accent:#a0a0a0;
-  --muted:#5e5e5e;
-  --glass:rgba(255,255,255,0.6);
+:root{
+  --bg:#bfc1c2;           /* màu nền bạc */
+  --card:#e2e3e4;
+  --accent:#c59a52;
+  --text:#222;
+  --muted:#555;
+  --glass:rgba(255,255,255,0.25);
   --maxw:880px;
 }
 *{box-sizing:border-box}
 body{
   font-family:Inter,system-ui,Arial;
   margin:0;
-  background:linear-gradient(180deg,#ececec 0%, #f4f4f4 50%, #d6d6d6 100%);
-  color:#222;
+  background:var(--bg);
+  color:var(--text);
   -webkit-font-smoothing:antialiased;
 }
 .wrap{max-width:var(--maxw);margin:40px auto;padding:28px;}
-.header{display:flex;gap:20px;align-items:center;background:var(--card);border-radius:14px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,0.1);}
-.avatar{width:120px;height:120px;border-radius:14px;overflow:hidden;flex:0 0 120px;box-shadow:0 6px 18px rgba(0,0,0,0.15);}
-.avatar img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;}
-.meta{flex:1}
-h1{margin:0;font-size:28px;letter-spacing:0.6px;}
-.role{margin-top:8px;color:var(--muted);font-weight:600;}
-.tagline{margin-top:12px;color:var(--muted);font-size:15px;}
-
-.section{margin-top:24px;}
 .card{
   background:var(--card);
   padding:20px;
   border-radius:12px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
   margin-top:14px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 0.8s ease-out;
 }
-.card.visible{opacity:1;transform:translateY(0);}
 
-.section-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.section-title h3{margin:0;}
+/* Header */
+.header{display:flex;gap:20px;align-items:center}
+.avatar{width:120px;height:120px;border-radius:14px;overflow:hidden;flex:0 0 120px}
+.avatar img{width:100%;height:100%;object-fit:cover}
 
-ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;}
-ul.skills li{background:var(--glass);padding:8px 10px;border-radius:8px;color:var(--muted);font-weight:600;}
+/* Section title */
+.section{margin-top:24px;}
+.section-title h3{margin:0 0 10px 0}
 
-/* LOGO SECTION */
-.logos{display:flex;flex-direction:column;gap:16px;}
-.logo-item{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-.logo-item .thumb{width:100%;max-width:320px;border-radius:12px;overflow:hidden;flex:0 0 auto;}
-.logo-item .thumb img{width:100%;height:auto;object-fit:cover;border-radius:12px;cursor:pointer;}
-.logo-item .info{flex:1;min-width:240px;}
-.logo-item .info h4{margin:0 0 6px 0;}
-.logo-item .info p{margin:0;color:var(--muted);font-size:14px;}
-
-/* BANNER SECTION */
-.banners{display:flex;flex-direction:column;gap:18px;}
-.banner-item{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
-.banner-item .thumb{width:100%;max-width:600px;aspect-ratio:21/9;border-radius:12px;overflow:hidden;flex:0 0 auto;}
-.banner-item .thumb img{width:100%;height:100%;object-fit:cover;border-radius:12px;cursor:pointer;}
-.banner-item .info{flex:1;min-width:240px;}
-.banner-item .info h4{margin:0 0 6px 0;}
-.banner-item .info p{margin:0;color:var(--muted);font-size:14px;}
-
-/* CONTACT */
-.contact{display:flex;flex-direction:column;gap:8px;}
-.contact a{color:inherit;text-decoration:none;background:linear-gradient(90deg, rgba(160,160,160,0.15), rgba(160,160,160,0.05));padding:10px;border-radius:8px;}
-
-footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;}
-
-/* VIEWER */
-.img-viewer {
-  position: fixed;top:0;left:0;width:100vw;height:100vh;
-  background:rgba(0,0,0,0.9);
-  display:flex;justify-content:center;align-items:center;
-  z-index:9999;opacity:0;pointer-events:none;
-  transition:opacity 0.3s ease;
+/* Skills */
+ul.skills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}
+ul.skills li{
+  background:var(--glass);
+  padding:8px 10px;
+  border-radius:8px;
+  color:var(--muted);
+  font-weight:600;
 }
-.img-viewer img{max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 30px rgba(0,0,0,0.6);}
-.img-viewer.active{opacity:1;pointer-events:auto;}
-.img-viewer .close-btn{position:absolute;top:20px;right:30px;font-size:32px;color:white;cursor:pointer;font-weight:800;}
 
-/* RESPONSIVE */
-@media (max-width:600px){
-  .logo-item, .banner-item{flex-direction:column;align-items:flex-start;}
-  .logo-item .thumb, .banner-item .thumb{width:100%;height:auto;}
+/* Logo + Banner layout */
+.projects, .banners {display:flex;flex-direction:column;gap:16px}
+.project, .banner-item {
+  display:flex;flex-direction:column;gap:10px;
+  background:var(--glass);padding:14px;border-radius:10px;
 }
+.thumb img{
+  width:100%;
+  border-radius:10px;
+  object-fit:cover;
+}
+.project .thumb img{aspect-ratio:1/1;}      /* Logo hình vuông */
+.banner-item .thumb img{aspect-ratio:21/9;} /* Banner tỷ lệ 21:9 */
+
+/* Contact */
+.contact{display:flex;flex-direction:column;gap:8px}
+.contact a{
+  color:var(--text);
+  text-decoration:none;
+  background:rgba(197,154,82,0.15);
+  padding:10px;border-radius:8px;
+}
+
+/* Footer */
+footer{text-align:center;margin-top:24px;color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- HEADER -->
-<div class="header card visible">
+<div class="header card">
   <div class="avatar"><img src="images/avatar.jpg" alt="Serpentfox Avatar" /></div>
   <div class="meta">
     <h1>SERPENTFOX <span style="color:var(--accent);font-weight:800">— Designer</span></h1>
@@ -106,13 +90,11 @@ footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;}
   </div>
 </div>
 
-<!-- GIỚI THIỆU -->
 <div class="section card">
   <div class="section-title"><h3>Giới thiệu</h3></div>
   <p>Tôi là <strong>Serpentfox</strong>, một <strong>freelance designer</strong> với niềm đam mê sáng tạo trong từng chi tiết hình ảnh.</p>
 </div>
 
-<!-- KỸ NĂNG -->
 <div class="section card">
   <div class="section-title"><h3>⚙️ Kỹ năng chính</h3></div>
   <ul class="skills">
@@ -120,98 +102,53 @@ footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;}
   </ul>
 </div>
 
-<!-- LOGO -->
 <div class="section card">
   <div class="section-title"><h3>Logo</h3></div>
-  <div class="logos">
-    <div class="logo-item">
-      <div class="thumb"><img src="images/thang4.jpg" alt="Thang4 Logo"></div>
-      <div class="info"><h4>Thang4 — Đơn giản nhẹ nhàng</h4><p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p></div>
+  <div class="projects">
+    <div class="project">
+      <div class="thumb"><img src="images/thang4_logo.jpg" alt="Thang4 Logo"></div>
+      <h4>Thang4 — Đơn giản nhẹ nhàng</h4>
+      <p>Logo toả lên vẻ sang trọng, nhẹ nhàng gợi về sự giao thoa giữa mùa xuân và mùa hạ.</p>
     </div>
-    <div class="logo-item">
-      <div class="thumb"><img src="images/sur.jpg" alt="SUR Logo"></div>
-      <div class="info"><h4>SUR — Huy hiệu tinh thần</h4><p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p></div>
-    </div>
-    <div class="logo-item">
-      <div class="thumb"><img src="images/nfe.jpg" alt="NFE Logo"></div>
-      <div class="info"><h4>NFE — NewForce Esports</h4><p>Nhận diện đơn giản, ánh kim, thể hiện tốc độ và sức mạnh đội tuyển.</p></div>
+    <div class="project">
+      <div class="thumb"><img src="images/sur_logo.jpg" alt="SUR Logo"></div>
+      <h4>SUR — Huy hiệu tinh thần</h4>
+      <p>Thiết kế lấy cảm hứng họa tiết truyền thống, phối màu vàng - đỏ, biểu tượng quyền lực.</p>
     </div>
   </div>
 </div>
 
-<!-- BANNER -->
 <div class="section card">
   <div class="section-title"><h3>Banner</h3></div>
   <div class="banners">
     <div class="banner-item">
       <div class="thumb"><img src="images/thang4_banner.jpg" alt="Thang4 Banner"></div>
-      <div class="info"><h4>Thang4 — Dịu dàng và tinh tế</h4><p>Banner thiết kế bố cục rộng, ánh bạc nhẹ, mang phong cách mùa xuân thanh lịch.</p></div>
-    </div>
-    <div class="banner-item">
-      <div class="thumb"><img src="images/sur_banner.jpg" alt="SUR Banner"></div>
-      <div class="info"><h4>SUR — Đậm bản sắc</h4><p>Thiết kế phối vàng đỏ, tỷ lệ 21:9 hiện đại, tượng trưng cho quyền lực và năng lượng.</p></div>
+      <h4>Thang4 — Mùa sắc tinh khôi</h4>
+      <p>Banner phối nền sáng, cảm giác nhẹ nhàng và sang trọng.</p>
     </div>
     <div class="banner-item">
       <div class="thumb"><img src="images/nfe_banner.jpg" alt="NFE Banner"></div>
-      <div class="info"><h4>NFE — Power & Speed</h4><p>Banner thể thao ánh kim, phông bạc sáng, biểu tượng tốc độ và đam mê esports.</p></div>
+      <h4>NFE — Sức mạnh Esports</h4>
+      <p>Tỉ lệ 21:9, màu ánh kim gợi lên tốc độ và năng lượng.</p>
     </div>
   </div>
 </div>
 
-<!-- LIÊN HỆ -->
 <div class="section card">
   <div class="section-title"><h3>Liên hệ</h3></div>
   <div class="contact">
-    <a href="https://www.tiktok.com/@serpentfoxdesigner" target="_blank">TikTok: @serpentfoxdesigner</a>
-    <a href="https://www.instagram.com/dathanmar" target="_blank">Instagram: @dathanmar</a>
+    <a href="https://www.tiktok.com/@serpentfoxdesigner">TikTok: @serpentfoxdesigner</a>
+    <a href="https://www.instagram.com/dathanmar">Instagram: @dathanmar</a>
     <a href="mailto:user.nguyenphongdat@gmail.com">Email: user.nguyenphongdat@gmail.com</a>
   </div>
 </div>
 
-<!-- TRIẾT LÝ -->
 <div class="section card">
   <div class="section-title"><h3>Triết lý thiết kế</h3></div>
-  <p style="color:var(--muted)">"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
+  <p>"Mỗi thiết kế là một linh hồn. Tôi không chỉ tạo hình, tôi tạo cảm xúc." — Serpentfox</p>
 </div>
 
-<footer>
-© SERPENTFOX • Portfolio — Designed by Serpentfox
-</footer>
+<footer>© SERPENTFOX • Portfolio — Designed by Serpentfox</footer>
 </div>
-
-<!-- IMAGE VIEWER -->
-<div class="img-viewer" id="imgViewer">
-  <span class="close-btn" id="closeViewer">×</span>
-  <img src="" alt="Xem ảnh lớn">
-</div>
-
-<script>
-// Viewer
-const viewer = document.getElementById('imgViewer');
-const viewerImg = viewer.querySelector('img');
-document.querySelectorAll('.thumb img, .avatar img').forEach(img => {
-  img.addEventListener('click', () => {
-    viewerImg.src = img.src;
-    viewer.classList.add('active');
-  });
-});
-document.getElementById('closeViewer').addEventListener('click', () => {
-  viewer.classList.remove('active');
-});
-viewer.addEventListener('click', e => {
-  if(e.target === viewer) viewer.classList.remove('active');
-});
-
-// Scroll animation
-const cards = document.querySelectorAll('.card');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-}, {threshold: 0.15});
-cards.forEach(card => observer.observe(card));
-</script>
 </body>
 </html>
